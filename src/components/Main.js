@@ -3,6 +3,7 @@ import styled from "styled-components";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 import MainCategory from "./Main.Category";
+import MainBottomCategory from "./Main.BottomCategory";
 
 const Main = () => {
 	const imgList = [
@@ -11,20 +12,46 @@ const Main = () => {
 		{ src: require("../styles/assets/3.jpg"), alt: "" },
 	];
 
+	const centerImgList = [
+		{ src: require("../styles/assets/center1.jpg"), alt: "" },
+		{ src: require("../styles/assets/center2.jpg"), alt: "" },
+		{ src: require("../styles/assets/center3.jpg"), alt: "" },
+	];
+
 	return (
 		<Layout>
-			<BannerInner>
-				<Carousel autoPlay={true} swipeable={true} infiniteLoop={true}>
-					{imgList?.map((props) => (
-						<BannerWrap>
-							<Banner {...props} />
-						</BannerWrap>
-					))}
-				</Carousel>
-			</BannerInner>
-			<LayoutBottomInner>
-				<MainCategory />
-			</LayoutBottomInner>
+			<LayoutInner>
+				<BannerInner>
+					<Carousel swipeable={true} infiniteLoop={true}>
+						{imgList?.map((props) => (
+							<BannerWrap>
+								<Banner {...props} />
+							</BannerWrap>
+						))}
+					</Carousel>
+				</BannerInner>
+				<LayoutBottomInner>
+					<MainCategory />
+				</LayoutBottomInner>
+				<CenterBannerLayout>
+					<Carousel
+						autoPlay={true}
+						showStatus={false}
+						swipeable={true}
+						infiniteLoop={true}
+						showIndicators={false}
+					>
+						{centerImgList?.map((props) => (
+							<BannerWrap>
+								<Banner {...props} />
+							</BannerWrap>
+						))}
+					</Carousel>
+				</CenterBannerLayout>
+				<BottomCategoryLayout>
+					<MainBottomCategory />
+				</BottomCategoryLayout>
+			</LayoutInner>
 		</Layout>
 	);
 };
@@ -39,10 +66,14 @@ const Layout = styled.div`
 	padding-top: 62px;
 `;
 
+const LayoutInner = styled.div`
+	width: 100%;
+	max-width: 900px;
+`;
+
 const BannerInner = styled.div`
 	display: flex;
 	width: 100%;
-	max-width: 900px;
 	justify-content: center;
 	align-items: center;
 `;
@@ -54,13 +85,15 @@ const LayoutBottomInner = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	max-width: 900px;
 	width: 100%;
 `;
 
-const Item = styled.div`
+const CenterBannerLayout = styled.div`
 	width: 100%;
-	height: 1100px;
+`;
+
+const BottomCategoryLayout = styled.div`
+	width: 100%;
 `;
 
 export default Main;

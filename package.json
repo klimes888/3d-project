@@ -10,6 +10,7 @@
 		"react-dom": "^18.2.0",
 		"react-icons": "^4.8.0",
 		"react-responsive-carousel": "^3.2.23",
+		"react-router-dom": "^6.8.2",
 		"react-scripts": "5.0.1",
 		"styled-components": "^5.3.8",
 		"web-vitals": "^2.1.4"
@@ -46,5 +47,5 @@
 	"devDependencies": {
 		"gh-pages": "^5.0.0"
 	},
-	"homepage": "https://klimes888.github.io/3d-project/"
+	"homepage": "/3d-project/#"
 }

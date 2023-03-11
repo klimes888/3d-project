@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import styled from "styled-components";
 import MainCard from "./Main.Card";
 import { FaAngleRight } from "react-icons/fa";
@@ -58,8 +58,10 @@ export default function MainCategory() {
 			</LayoutTop>
 			<Divider />
 			<MainLayout>
-				{upperContents?.map((data) => (
-					<MainCard {...data} />
+				{upperContents?.map((data, idx) => (
+					<Fragment key={idx}>
+						<MainCard {...data} />
+					</Fragment>
 				))}
 			</MainLayout>
 		</Layout>

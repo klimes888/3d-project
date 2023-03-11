@@ -23,8 +23,8 @@ const Main = () => {
 			<LayoutInner>
 				<BannerInner>
 					<Carousel swipeable={true} infiniteLoop={true}>
-						{imgList?.map((props) => (
-							<BannerWrap>
+						{imgList?.map((props, idx) => (
+							<BannerWrap key={idx}>
 								<Banner {...props} />
 							</BannerWrap>
 						))}
@@ -41,8 +41,8 @@ const Main = () => {
 						infiniteLoop={true}
 						showIndicators={false}
 					>
-						{centerImgList?.map((props) => (
-							<BannerWrap>
+						{centerImgList?.map((props, idx) => (
+							<BannerWrap key={idx}>
 								<Banner {...props} />
 							</BannerWrap>
 						))}

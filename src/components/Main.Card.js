@@ -6,7 +6,7 @@ export default function MainCard({ src, contents }) {
 	const { title, like, view, category, discount, price, tag } = contents;
 	return (
 		<Layout>
-			<ThumbnailWrap>
+			<ThumbnailWrap onClick={() => {}}>
 				<Thumbnail src={src} alt="" />
 			</ThumbnailWrap>
 			<ContentsLayout>
@@ -40,8 +40,8 @@ export default function MainCard({ src, contents }) {
 						<Font5>+ 할인</Font5>
 					</PayInfoLayout>
 					<TagsLayout>
-						{tag.map((item) => (
-							<Tags>
+						{tag.map((item, idx) => (
+							<Tags key={idx}>
 								<Font6>{item}</Font6>
 							</Tags>
 						))}

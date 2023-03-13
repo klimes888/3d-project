@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import {
 	FaSearch,
@@ -19,12 +20,13 @@ const Header = () => {
 		{ type: "fund", name: "펀딩" },
 		{ type: "migrate", name: "입점 신청" },
 	];
+	const navigate = useNavigate();
 
 	return (
 		<Layout>
 			<LayoutInner>
 				<LeftInner>
-					<Logo onClick={() => {}}></Logo>
+					<Logo onClick={() => navigate("/")}></Logo>
 					<FontWrap>
 						<Font1>웹툰</Font1>
 					</FontWrap>

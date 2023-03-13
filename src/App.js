@@ -1,5 +1,6 @@
-import Header from "./components/Header";
-import Main from "./components/Main";
+import Header from "./components/Header/Header";
+import Main from "./components/Main/Main";
+import View from "./components/View/View";
 
 import GlobalStyle from "./styles/GlobalStyle";
 
@@ -13,6 +14,7 @@ function App() {
 				<Header />
 				<Routes>
 					<Route path="/" element={<Main />} />
+					<Route exact path="/view" element={<View />} />
 				</Routes>
 			</HashRouter>
 		</div>

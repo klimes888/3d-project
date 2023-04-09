@@ -40,6 +40,7 @@ export default function View() {
 	return (
 		<Layout>
 			<LayoutInner>
+				{/********** 3D VIEW  **************/}
 				<ThreeDLayout>
 					<ThreeDView />
 				</ThreeDLayout>
@@ -121,8 +122,8 @@ export default function View() {
 					</DescWrap>
 					<SelectorBoxWrap>
 						<VscHubot size={25} color="#777" />
-						{threeDData.selector.map((item) => (
-							<Selector>
+						{threeDData.selector.map((item, i) => (
+							<Selector key={i}>
 								<Font1>{item}</Font1>
 							</Selector>
 						))}
@@ -130,16 +131,16 @@ export default function View() {
 					<SelectorBoxWrap>
 						<VscTag size={20} color="#999" />
 						<MRDummy />
-						{threeDData.tags.map((item) => (
-							<Tags>
+						{threeDData.tags.map((item, i) => (
+							<Tags key={i}>
 								<TagFont>{item}</TagFont>
 							</Tags>
 						))}
 					</SelectorBoxWrap>
 					<CommentSummaryWrap>
 						<ImageListWrap>
-							{imgList.map((item) => (
-								<MiniImageWrap>
+							{imgList.map((item, i) => (
+								<MiniImageWrap key={i}>
 									<MiniImage src={item} alt="" />
 								</MiniImageWrap>
 							))}

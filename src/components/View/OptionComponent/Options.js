@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import OptionObj from "../OptionComponent/Option.Obj";
+import OptionSpotLight from "../OptionComponent/Option.SpotLight";
 
 const TabButton = [
 	{ title: "오브젝트", value: "object" },
@@ -12,13 +13,14 @@ const TabButton = [
 
 export default function OptionsComponent() {
 	const [currentTab, setCurrentTab] = useState("object");
+	const [currentTitle, setCurrentTitle] = useState("오브젝트");
 
 	const tabs = () => {
 		switch (currentTab) {
 			case "object":
 				return <OptionObj />;
-			case "object":
-				return <OptionObj />;
+			case "spotlight":
+				return <OptionSpotLight />;
 			default:
 				return <>Loading...</>;
 		}
@@ -31,7 +33,10 @@ export default function OptionsComponent() {
 					{TabButton.map(({ title, value }, index) => (
 						<Button
 							key={index}
-							onClick={() => setCurrentTab(value)}
+							onClick={() => {
+								setCurrentTab(value);
+								setCurrentTitle(title);
+							}}
 							focus={currentTab === value}
 						>
 							{title}
@@ -40,7 +45,7 @@ export default function OptionsComponent() {
 				</ButtonHeader>
 				<LayoutBody>
 					<TitleWrap>
-						<MainTitle>{"오브젝트 속성"}</MainTitle>
+						<MainTitle>{currentTitle}</MainTitle>
 					</TitleWrap>
 					{tabs()}
 				</LayoutBody>
@@ -65,6 +70,7 @@ const LayoutInner = styled.div`
 	display: flex;
 	flex-direction: column;
 	width: 100%;
+	height: 100%;
 	border-radius: 8px;
 	background-color: #fff;
 	padding: 12px;
@@ -84,7 +90,7 @@ const Button = styled.button`
 	justify-content: center;
 	align-items: center;
 	border-radius: 8px;
-	padding: 4px 26px;
+	padding: 4px 18px;
 	font-size: 12px;
 	font-weight: normal;
 	white-space: nowrap;
@@ -96,7 +102,6 @@ const Button = styled.button`
 `;
 
 // body
-
 const LayoutBody = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -104,6 +109,7 @@ const LayoutBody = styled.div`
 	height: 100%;
 	margin-top: 8px;
 	padding: 4px;
+	overflow-y: scroll;
 `;
 
 const TitleWrap = styled.div`

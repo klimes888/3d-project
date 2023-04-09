@@ -74,6 +74,7 @@ const SlideBar = styled.input`
 const TitleWrap = styled.div`
 	width: 100%;
 	margin-top: 8px;
+	margin-bottom: 10px;
 `;
 
 const MainTitle = styled.p`

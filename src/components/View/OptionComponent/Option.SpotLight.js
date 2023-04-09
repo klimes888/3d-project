@@ -4,30 +4,31 @@ import { AppStore } from "../../../store/app.context";
 import styled from "styled-components";
 
 export default function OptionSpotLight() {
-	const { setObjController, objController } = useContext(AppStore);
+	const { spotLightController, setSpotLightController } =
+		useContext(AppStore);
 	const onChangeHandler = (index, value) => {
-		const updatedOptions = [...objController]; // 현재 objController 배열 복사
+		const updatedOptions = [...spotLightController]; // 현재 objController 배열 복사
 		updatedOptions[index] = {
 			...updatedOptions[index],
 			value: Number(value),
 		}; // 변경된 값을 새로운 객체로 복사
-		setObjController(updatedOptions); // 새로운 배열로 상태 업데이트
+		setSpotLightController(updatedOptions); // 새로운 배열로 상태 업데이트
 	};
 
 	const onChangeColorHandler = (index, value) => {
 		// if (type !== "spotlight") return;
-		const updatedOptions = [...objController]; // 현재 objController 배열 복사
+		const updatedOptions = [...spotLightController]; // 현재 objController 배열 복사
 		if (updatedOptions[index]._type === "color") {
 			updatedOptions[index] = {
 				...updatedOptions[index],
 				color: value,
 			}; // 변경된 값을 새로운 객체로 복사
-			setObjController(updatedOptions); // 새로운 배열로 상태 업데이트
+			setSpotLightController(updatedOptions); // 새로운 배열로 상태 업데이트
 		}
 	};
 	return (
 		<>
-			{objController.map((props, index) => (
+			{spotLightController.map((props, index) => (
 				<SlideBarLayout key={index}>
 					<TitleWrap>
 						<Title>{props.title}</Title>
@@ -49,7 +50,7 @@ export default function OptionSpotLight() {
 						) : (
 							<HexColorPickerWrap>
 								<HexColorPicker
-									color={objController[1].color}
+									color={spotLightController[0].color}
 									onChange={(value) =>
 										onChangeColorHandler(index, value)
 									}
@@ -65,6 +66,7 @@ export default function OptionSpotLight() {
 
 const SlideBarLayout = styled.div`
 	width: 100%;
+	height: auto;
 `;
 
 const SlideBar = styled.input`
@@ -74,6 +76,7 @@ const SlideBar = styled.input`
 const TitleWrap = styled.div`
 	width: 100%;
 	margin-top: 8px;
+	margin-bottom: 10px;
 `;
 
 const MainTitle = styled.p`

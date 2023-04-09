@@ -20,6 +20,7 @@ import {
 	OrbitControls,
 	PerspectiveCamera,
 	Environment,
+	SpotLight,
 } from "@react-three/drei";
 import { useContext } from "react";
 
@@ -39,7 +40,9 @@ function Model({ scene, isClick }) {
 }
 
 export default function ThreeDView() {
-	const { objController, currentTab } = useContext(AppStore);
+	const { objController, spotLightController } = useContext(AppStore);
+	console.log("spotLightController", spotLightController);
+	const [isClick, setIsClick] = useState(false);
 	const canvasRef = useRef(null);
 	const spotLight = useRef();
 	const [scene, setScene] = useState(null);
@@ -49,23 +52,23 @@ export default function ThreeDView() {
 		const newScene = new THREE.Scene();
 		newScene.add(gltfLoader.scene);
 
-		const newSpotLight = new THREE.SpotLight(
-			"#F90707",
-			10,
-			30,
-			Math.PI / 2,
-			1
-		);
-		newSpotLight.position.set(0, 20, 0);
-		newSpotLight.castShadow = true;
-		newScene.add(newSpotLight);
+		// const newSpotLight = new THREE.SpotLight(
+		// 	"#F90707",
+		// 	spotLightController[1].value,
+		// 	30,
+		// 	Math.PI / 2,
+		// 	1
+		// );
+		// newSpotLight.position.set(0, 20, 0);
+		// newSpotLight.castShadow = true;
+		// newScene.add(newSpotLight);
 
 		setScene(newScene);
-		spotLight.current = newSpotLight;
+		// spotLight.current = newSpotLight;
 
 		return () => {
 			newScene.remove(gltfLoader.scene);
-			newScene.remove(newSpotLight);
+			// newScene.remove(newSpotLight);
 		};
 	}, [gltfLoader]);
 
@@ -80,14 +83,13 @@ export default function ThreeDView() {
 		}
 	}, []);
 
-	const handleMouseDown = useCallback(() => {
-		setIsClick(true);
-	}, []);
+	// if (!scene) return null;
 
-	const [isClick, setIsClick] = useState(false);
-
-	if (!scene) return null;
-
+	const spotLightPosition = [
+		spotLightController[4].value,
+		spotLightController[5].value,
+		spotLightController[6].value,
+	];
 	return (
 		<Layout>
 			<Suspense fallback={<LoadLayout>loading..</LoadLayout>}>
@@ -96,7 +98,7 @@ export default function ThreeDView() {
 					style={{ height: "70vh" }}
 					dpr={[1, 2]}
 					gl={{ preserveDrawingBuffer: true }}
-					onMouseDown={handleMouseDown}
+					onMouseDown={() => setIsClick(true)}
 				>
 					<PerspectiveCamera
 						makeDefault
@@ -113,7 +115,17 @@ export default function ThreeDView() {
 						color={objController[0].color}
 						intensity={objController[1].value}
 					/>
-					<pointLight position={[10, 10, 10]} />
+					<SpotLight
+						intensity={spotLightController[1].value}
+						color={spotLightController[0].color}
+						position={spotLightPosition}
+						distance={spotLightController[2].value}
+						angle={Math.PI / spotLightController[3]?.value || 3}
+						receiveShadow={true}
+						castShadow={true}
+						penumbra={1}
+					/>
+					{/* <pointLight position={[10, 10, 10]} /> */}
 					<Environment background preset="sunset" blur={0.8} />
 					<Stage
 						intensity={0.5}

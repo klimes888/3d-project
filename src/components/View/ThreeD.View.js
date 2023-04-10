@@ -7,7 +7,8 @@ import React, {
 	useCallback,
 } from "react";
 import styled from "styled-components";
-import * as THREE from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+
 import { Canvas, useFrame } from "react-three-fiber";
 import CaptureComponent from "./OptionComponent/Cpature";
 import OptionsComponent from "./OptionComponent/Options";
@@ -41,35 +42,18 @@ function Model({ scene, isClick }) {
 
 export default function ThreeDView() {
 	const { objController, spotLightController } = useContext(AppStore);
-	console.log("spotLightController", spotLightController);
+
 	const [isClick, setIsClick] = useState(false);
 	const canvasRef = useRef(null);
-	const spotLight = useRef();
 	const [scene, setScene] = useState(null);
-	const gltfLoader = useGLTF(require("../../styles/3d/room.glb"));
+	//   const gltf = useGLTF(require("../../styles/3d/room.glb"));
+	const gltfLoader = useRef(null);
 
 	useMemo(() => {
-		const newScene = new THREE.Scene();
-		newScene.add(gltfLoader.scene);
-
-		// const newSpotLight = new THREE.SpotLight(
-		// 	"#F90707",
-		// 	spotLightController[1].value,
-		// 	30,
-		// 	Math.PI / 2,
-		// 	1
-		// );
-		// newSpotLight.position.set(0, 20, 0);
-		// newSpotLight.castShadow = true;
-		// newScene.add(newSpotLight);
-
-		setScene(newScene);
-		// spotLight.current = newSpotLight;
-
-		return () => {
-			newScene.remove(gltfLoader.scene);
-			// newScene.remove(newSpotLight);
-		};
+		gltfLoader.current = new GLTFLoader();
+		gltfLoader.current.load(require("../../styles/3d/room.glb"), (gltf) => {
+			setScene(gltf.scene);
+		});
 	}, [gltfLoader]);
 
 	const handleSceneUpdate = useCallback(() => {
@@ -83,7 +67,7 @@ export default function ThreeDView() {
 		}
 	}, []);
 
-	// if (!scene) return null;
+	if (!scene) return null;
 
 	const spotLightPosition = [
 		spotLightController[4].value,

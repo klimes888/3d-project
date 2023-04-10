@@ -58,11 +58,11 @@ const Layout = styled.div`
 	position: absolute;
 	left: 12px;
 	top: 14px;
-	bottom: 0;
+	/* bottom: 60px; */
 	width: 100%;
 	height: 100%;
-	max-width: 280px;
-	max-height: 450px;
+	max-width: 300px;
+	max-height: 95%;
 	overflow: hidden;
 `;
 

@@ -109,7 +109,6 @@ export default function ThreeDView() {
 						castShadow={true}
 						penumbra={1}
 					/>
-					{/* <pointLight position={[10, 10, 10]} /> */}
 					<Environment background preset="sunset" blur={0.8} />
 					<Stage
 						intensity={0.5}
